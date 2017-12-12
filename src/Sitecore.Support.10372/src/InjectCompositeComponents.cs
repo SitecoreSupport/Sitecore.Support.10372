@@ -27,11 +27,8 @@ namespace Sitecore.Support.XA.Feature.Composites.Pipelines.GetXmlBasedLayoutDefi
       {
         XElement device = xelement;
         DeviceModel deviceModel = new DeviceModel(device.ToXmlNode());
-        if (deviceModel.DeviceId == Context.Device.ID)
-        {
           compositeRenderings = compositeRenderings.Where<XElement>((Func<XElement, bool>)(e => this.NotInjectedIntoDevice(new Sitecore.XA.Foundation.Presentation.Layout.RenderingModel(e.ToXmlNode()), deviceModel))).ToList<XElement>();
           compositeRenderings.ForEach((Action<XElement>)(compositeRendering => device.Add((object)compositeRendering)));
-        }
       }
     }
     private void SetAttribute(XElement composite, string attribute, object value)
